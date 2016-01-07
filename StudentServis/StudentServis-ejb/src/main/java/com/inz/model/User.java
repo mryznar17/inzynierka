@@ -1,9 +1,7 @@
 package com.inz.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.List;
 
 
@@ -14,15 +12,15 @@ import java.util.List;
 @Entity
 @Table(name="users")
 @NamedQueries({
-	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
-	@NamedQuery(name="user.byId", query="select u from User as u where u.userId=:id"),
+	@NamedQuery(name="user.findAll", query="SELECT u FROM User u"),
+	@NamedQuery(name="user.byId", query="select u from User as u where u.userId=:userId"),
 	@NamedQuery(name="user.byLogin", query="select u from User as u where u.login=:login"),
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="user_id")
+	@Column(name="user_id", columnDefinition = "serial")
 	private Integer userId;
 
 	private String email;

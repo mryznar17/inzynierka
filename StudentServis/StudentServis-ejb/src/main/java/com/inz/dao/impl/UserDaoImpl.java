@@ -1,5 +1,6 @@
 package com.inz.dao.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -22,13 +23,12 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public List<User> getUsers() {
-		return em.createNamedQuery("user.findAll")
-				.getResultList();
+		return em.createNamedQuery("user.findAll").getResultList();
 	}
 
 	@Override
 	public User getUser(int id) {
-		return null;
+		return (User) em.createNamedQuery("user.byId").setParameter("userId", id).getSingleResult();
 	}
 
 	@Override
@@ -38,20 +38,58 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-
+		em.merge(user);
 	}
 
 	@Override
 	public void deleteUser(int id) {
-		// TODO Auto-generated method stub
-
+		User u = getUser(id);
+		em.remove(u);
 	}
 
 	@Override
 	public void deleteUser(String login) {
-		// TODO Auto-generated method stub
+		User u = getUser(login);
+		em.remove(u);
+	}
 
+	@Override
+	public void addUser(String login, String name, String surname, String email,
+			String password) {
+		User u = new User();
+		u.setLogin(login);
+		u.setName(name);
+		u.setSurname(surname);
+		u.setEmail(email);
+		u.setPassword(password);
+		u.setUserId(generateId());
+		em.persist(u);
+	}
+
+	@Override
+	public void addUser(User user) {
+		if(user.getUserId().equals(null)){
+			user.setUserId(generateId());
+		}
+		em.persist(user);
+	}
+	
+	private int generateId(){
+		List<User> users = getUsers();
+		int id=0;
+		List<Integer> ints = new LinkedList<Integer>();
+		for(User usr:users){
+			ints.add(usr.getUserId());
+		}
+		int i=1;
+		while(true){
+			if(ints.contains(i)) i++;
+			else{
+				id=i;
+				break;
+			}
+		}
+		return id;
 	}
 
 }

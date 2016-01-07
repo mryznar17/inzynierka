@@ -1,7 +1,9 @@
 package com.inz.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -10,7 +12,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="File.findAll", query="SELECT f FROM File f")
+@NamedQueries({
+	@NamedQuery(name="File.findAll", query="SELECT f FROM File f"),
+	@NamedQuery(name="File.findByName", query="SELECT f FROM File as f where f.fileName=:fileName")
+})
 public class File implements Serializable {
 	private static final long serialVersionUID = 1L;
 

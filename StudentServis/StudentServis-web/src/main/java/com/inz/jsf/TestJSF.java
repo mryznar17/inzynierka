@@ -21,7 +21,7 @@ public class TestJSF {
 
 	public String getLogin() {
 		login="Marek";
-		User u = Dao.getUser("paulinka");
+		User u = Dao.getUser(1);
 		login = u.getName();
 		return login;
 	}
@@ -31,6 +31,7 @@ public class TestJSF {
 	}
 	
 	public String wynik(){
+		Dao.addUser("login", "Imie", "nazwisko", "email@email.com", "password");
 		return "testF";
 	}
 }

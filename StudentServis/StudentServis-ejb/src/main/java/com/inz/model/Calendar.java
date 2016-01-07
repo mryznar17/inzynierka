@@ -1,7 +1,9 @@
 package com.inz.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -10,7 +12,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Calendar.findAll", query="SELECT c FROM Calendar c")
+@NamedQueries({
+	@NamedQuery(name="Calendar.findAll", query="SELECT c FROM Calendar c"),
+	@NamedQuery(name="Calendar.byId", query="SELECT c FROM Calendar as c where c.calId=:calId")
+})
 public class Calendar implements Serializable {
 	private static final long serialVersionUID = 1L;
 
