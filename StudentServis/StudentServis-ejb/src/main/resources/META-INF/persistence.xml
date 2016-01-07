@@ -7,11 +7,18 @@
    <persistence-unit name="primary">
       <!-- If you are running in a production environment, add a managed 
          data source, the example data source is just for development and testing! -->
-      <jta-data-source>java:jboss/datasources/StudentServisDS</jta-data-source>
+      <jta-data-source>java:jboss/datasources/StudentServisDataSource</jta-data-source>
+      <class>com.inz.model.Calendar</class>
+      <class>com.inz.model.Event</class>
+      <class>com.inz.model.File</class>
+      <class>com.inz.model.Role</class>
+      <class>com.inz.model.SharedFile</class>
+      <class>com.inz.model.User</class>
       <properties>
-         <!-- Properties for Hibernate -->
+         <!-- Properties for Hibernate 
          <property name="hibernate.hbm2ddl.auto" value="create-drop" />
          <property name="hibernate.show_sql" value="false" />
+         -->
       </properties>
    </persistence-unit>
 </persistence>
