@@ -1,16 +1,32 @@
 package com.inz.test;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import java.util.List;
 
-import com.inz.model.Role;
+import javax.ejb.EJB;
+
+import com.inz.dao.UserDao;
 import com.inz.model.User;
 
 public class Test {
 
+	@EJB private transient UserDao Dao;
+	
+	public UserDao getDao() {
+		return Dao;
+	}
+
+	public void setDao(UserDao dao) {
+		Dao = dao;
+	}
+
 	public static void main(String[] args) {
-		SessionFactory sessionFactory = new Configuration().configure()
+		
+		Test test = new Test();
+		List<User> users = test.getDao().getUsers();
+		for(User u:users){
+			System.out.println(u);
+		}
+/*		SessionFactory sessionFactory = new Configuration().configure()
 				.buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -23,7 +39,7 @@ public class Test {
 		//session.save(user);
 		session.save(role);
 		session.getTransaction().commit();
-		session.close();
+		session.close();*/
 	}
 
 }
