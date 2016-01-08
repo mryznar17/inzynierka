@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"> 
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Rejestracja</title></h:head> 
+<h:body>  
+	Zarejestruj się: 
+	<h:form>
+	<br />
+	   Login: <h:inputText id="login" value="#{userMan.login}" required="true"
+	   			validator="#{userMan.validateLogin}"
+	   			requiredMessage="Pole Login jest wymagane."/> 
+	   			<h:message for="login" style="color:red" /> <br />
+	   Hasło: <h:inputSecret id="password" value="#{userMan.password}" required="true" 
+	   							validatorMessage="Błąd walidacji: Hasło musi nie może zawierać znaków 
+	   							specjalnych oraz musi mieć długość od 5 do 30 znaków."
+	   							requiredMessage="Pole Hasło jest wymagane.">  
+	   			<f:validateRegex
+					pattern="[A-Za-z0-9]*{5,30}$" />
+			  </h:inputSecret>
+			  <h:message for="password" style="color:red" /> <br />
+		Imię: <h:inputText id="name" value="#{userMan.name}" required="true"  
+				requiredMessage="Pole Imię jest wymagane."/> 
+				<h:message for="name" style="color:red" /> <br />
+	Nazwisko: <h:inputText id="surname" value="#{userMan.surname}" required="true" 
+				requiredMessage="Pole Nazwisko jest wymagane."/> 
+				<h:message for="surname" style="color:red" /> <br />
+	   Email: <h:inputText id="email" value="#{userMan.email}" required="true" 
+				validatorMessage="Błąd walidacji: Email musi być postaci użytkownik@domena."
+				requiredMessage="Pole Email jest wymagane."> 
+				<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			  </h:inputText>
+			  <h:message for="email" style="color:red" /> <br />
+		<h:commandButton value="Dodaj mnie" action="#{userMan.addUser()}" />
+	</h:form>
+</h:body>
+
+</html>
