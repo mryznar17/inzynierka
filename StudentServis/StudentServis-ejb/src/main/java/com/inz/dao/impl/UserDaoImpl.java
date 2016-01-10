@@ -91,5 +91,4 @@ public class UserDaoImpl implements UserDao {
 		}
 		return id;
 	}
-
 }
