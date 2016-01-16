@@ -34,7 +34,7 @@
 		<security-constraint>
 		<display-name>Private</display-name>
 		<web-resource-collection>
-			<web-resource-name>Protected Area</web-resource-name>
+			<web-resource-name>Private</web-resource-name>
 			<url-pattern>*.xhtml</url-pattern>
 			<url-pattern>*.jsp</url-pattern>
 			<http-method>DELETE</http-method>
